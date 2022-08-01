@@ -13,14 +13,18 @@ import { SearchOutlined } from "@mui/icons-material";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const theme = createTheme();
 
 export default function Homes() {
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [age, setAge] = React.useState("");
 
   const handleChange = (newValue) => {
-    setValue(newValue);
+    setAge(newValue);
   };
 
   const handleSubmit = (event) => {
@@ -56,6 +60,28 @@ export default function Homes() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <FormControl sx={{ minWidth: 90 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Trip
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={age}
+                    onChange={handleChange}
+                    autoWidth
+                    label="Age"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Twenty</MenuItem>
+                    <MenuItem value={21}>Twenty one</MenuItem>
+                    <MenuItem value={22}>Twenty one and a half</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -78,16 +104,6 @@ export default function Homes() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email_sign_up"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
                 <BasicDateRangePicker />
               </Grid>
             </Grid>
@@ -99,11 +115,6 @@ export default function Homes() {
             >
               Search
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/login">Already have an account? Sign in</Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
