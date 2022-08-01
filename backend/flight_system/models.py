@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Flights(models.Model):
+class Flight(models.Model):
     name = models.CharField(max_length=120)
     departure = models.TextField()
     destination = models.TextField()
@@ -12,7 +12,7 @@ class Flights(models.Model):
         return self.name
 
 
-class Users(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
     email = models.EmailField()
