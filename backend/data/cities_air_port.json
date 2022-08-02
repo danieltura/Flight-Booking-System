@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Paris Orly Airport",
+    "code": "ORY",
+    "city": "Paris",
+    "country": "France"
+  },
+  {
+    "name": "Penn Station",
+    "code": "ZYP",
+    "city": "New York",
+    "country": "United States"
+  },
+  {
+    "name": "Dubai International Airport",
+    "code": "DXB",
+    "city": "Dubai",
+    "country": "United Arab Emirates"
+  },
+  {
+    "name": "Bangkok International Airport",
+    "code": "BKK",
+    "city": "Lak Si",
+    "country": "Thailand"
+  },
+  {
+    "name": "London City Airport",
+    "code": "LCY",
+    "city": "London",
+    "country": "United Kingdom"
+  }
+]

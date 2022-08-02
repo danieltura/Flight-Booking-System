@@ -1,12 +1,22 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Flight(models.Model):
-    name = models.CharField(max_length=120)
+    seats = models.IntegerField()
+    booked_seats = models.IntegerField()
     departure = models.TextField()
     destination = models.TextField()
+    time = models.DateTimeField()
+
+    def _str_(self):
+        return self.name
+
+
+class Airport(models.Model):
+    name = models.CharField(max_length=120)
+    code = models.CharField(max_length=120)
+    city = models.CharField(max_length=120)
+    country = models.CharField(max_length=120)
 
     def _str_(self):
         return self.name
@@ -17,7 +27,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=120)
     email = models.EmailField()
     password = models.TextField()
-    trips = models.BooleanField(default=False)
+    trips = models.TextField()
 
     def _str_(self):
-        return self.title
+        return self.first_name

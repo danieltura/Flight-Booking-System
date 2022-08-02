@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,6 +19,7 @@ function App() {
   const handleCurrentPage = (index) => {
     showCurrentPage(index);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">

@@ -6,6 +6,7 @@ from flight_system import views
 router = routers.DefaultRouter()
 router.register(r'flight', views.FlightView, 'flight')
 router.register(r'user', views.UserView, 'user')
+router.register(r'airport', views.AirportView, 'airport')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

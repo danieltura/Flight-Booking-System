@@ -65,7 +65,7 @@ export default function Homes() {
                   <InputLabel id="demo-simple-select-autowidth-label">
                     Trip
                   </InputLabel>
-                  <Select
+                  {/* <Select
                     labelId="demo-simple-select-autowidth-label"
                     id="demo-simple-select-autowidth"
                     value={age}
@@ -79,7 +79,7 @@ export default function Homes() {
                     <MenuItem value={10}>Twenty</MenuItem>
                     <MenuItem value={21}>Twenty one</MenuItem>
                     <MenuItem value={22}>Twenty one and a half</MenuItem>
-                  </Select>
+                  </Select> */}
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
