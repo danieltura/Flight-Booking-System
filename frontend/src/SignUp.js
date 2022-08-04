@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,23 +9,55 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import contexts from "./contexts";
+import SnackbarMessage from "./SnackbarMessage";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const [snackOpen, setSnackOpen] = useState(null);
+  const apiContext = useContext(contexts.apiContext);
+
+  const handleSnackBar = (state) => {
+    setSnackOpen(state);
+  };
+
+  const addUser = (user) =>
+    apiContext.user
+      .addUser(user)
+      .then(() => setSnackOpen(false))
+      .catch(() => setSnackOpen(true));
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
+      first_name: data.get("firstName"),
+      last_name: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
-    });
+      trips: "",
+    };
+    addUser(user);
+    event.target.firstName.value = null;
+    event.target.lastName.value = null;
+    event.target.email.value = null;
+    event.target.password.value = null;
   };
+
+  if (snackOpen === false) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+        <SnackbarMessage
+          color="error"
+          message="Failed, Provide all fields and unique email with correct format"
+          handleClose={handleSnackBar}
+          open={snackOpen}
+        />
         <Box
           sx={{
             marginTop: 8,

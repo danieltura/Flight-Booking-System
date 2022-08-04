@@ -14,7 +14,7 @@ class Flight(models.Model):
 
 class Airport(models.Model):
     name = models.CharField(max_length=120)
-    code = models.CharField(max_length=120)
+    code = models.CharField(max_length=120, unique=True)
     city = models.CharField(max_length=120)
     country = models.CharField(max_length=120)
 
@@ -25,9 +25,9 @@ class Airport(models.Model):
 class User(models.Model):
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.TextField()
-    trips = models.TextField()
+    trips = models.TextField(blank=True)
 
     def _str_(self):
         return self.first_name

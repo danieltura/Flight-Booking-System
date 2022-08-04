@@ -21,12 +21,6 @@ import Select from "@mui/material/Select";
 const theme = createTheme();
 
 export default function Homes() {
-  const [age, setAge] = React.useState("");
-
-  const handleChange = (newValue) => {
-    setAge(newValue);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

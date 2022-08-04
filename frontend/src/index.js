@@ -5,15 +5,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import App from "./App";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import contexts from "./contexts";
+import controllers from "./controller";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <BrowserRouter>
-    <CssBaseline />
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="login" element={<SignIn />} />
-      <Route path="signup" element={<SignUp />} />
-    </Routes>
-  </BrowserRouter>
-);
+
+root.render(<App />);
+

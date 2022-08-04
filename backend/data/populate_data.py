@@ -3,8 +3,11 @@ from sqlite3 import Error
 import json
 from datetime import datetime, timedelta
 from random import randrange
+import os
+import sys
 
-f = open('./cities_air_port.json', 'r', encoding='utf-8')
+f = open(os.path.join(
+    sys.path[0], "./cities_air_port.json"), 'r', encoding='utf-8')
 AIRPORTS = json.load(f)
 f.close()
 
@@ -94,11 +97,13 @@ def curate_flights(airports):
 
 def main():
     # create a database connection
-    database = "../db.sqlite3"
+    database = os.path.join(
+        sys.path[0], "../db.sqlite3")
     conn = create_connection(database)
 
     # clean up
-    table_names = ['flight_system_flight', 'flight_system_airport']
+    table_names = ['flight_system_flight',
+                   'flight_system_airport', 'flight_system_user']
     delete_all_rows(conn, table_names)
 
     # curate data
