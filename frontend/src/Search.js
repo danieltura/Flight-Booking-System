@@ -14,9 +14,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers-pro/AdapterDateFns";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import contexts from "./contexts";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -30,7 +28,10 @@ export default function Search() {
   const [fromAirportValue, setFromAirportValue] = useState("");
   const [toAirportValue, setToAirportValue] = useState("");
 
+  const [dateRange, setDateRange] = useState([null, null]);
+
   const [searchAirports, setSearchAirports] = useState(null);
+  const [searchData, setSearchData] = useState(null);
   const apiContext = useContext(contexts.apiContext);
   var airports = [];
 
@@ -54,14 +55,30 @@ export default function Search() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
+    setSearchData({
       to: toAirportValue,
       from: fromAirportValue,
+      from_date: dateRange[0],
+      to_date: dateRange[1],
     });
   };
 
   if (Object.keys(userContext.user).length === 0) {
     return <Navigate to="/login" />;
+  }
+
+  if (searchData !== null) {
+    return (
+      <Navigate
+        to="/flights"
+        state={{
+          to: toAirportValue,
+          from: fromAirportValue,
+          from_date: dateRange[0],
+          to_date: dateRange[1],
+        }}
+      />
+    );
   }
 
   return (
@@ -133,7 +150,10 @@ export default function Search() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <BasicDateRangePicker />
+                <BasicDateRangePicker
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
+                />
               </Grid>
             </Grid>
             <Button
@@ -151,18 +171,17 @@ export default function Search() {
   );
 }
 
-function BasicDateRangePicker() {
-  const [value, setValue] = React.useState([null, null]);
-
+function BasicDateRangePicker({ dateRange, setDateRange }) {
   return (
     <LocalizationProvider
       dateAdapter={AdapterDateFns}
       localeText={{ start: "Check-in", end: "Check-out" }}
     >
       <DateRangePicker
-        value={value}
+        value={dateRange}
         onChange={(newValue) => {
-          setValue(newValue);
+          setDateRange(newValue);
+          console.log(newValue);
         }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>

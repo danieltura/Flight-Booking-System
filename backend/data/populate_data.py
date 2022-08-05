@@ -15,10 +15,12 @@ f.close()
 def curate_flight_date(flight):
     flights = []
     base = datetime.today()
-    for x in range(0, 6):
-        flight_date = base + timedelta(days=x, hours=randrange(0, 25))
-        flight['time'] = flight_date
-        flights.append(flight)
+    base = base.replace(hour=0)
+    for x in range(0, 7):
+        flight_date = base + timedelta(days=x, hours=randrange(0, 23))
+        new = flight.copy()
+        new['time'] = flight_date
+        flights.append(new)
     return flights
 
 
@@ -111,8 +113,8 @@ def main():
     flights = curate_flights(AIRPORTS)
 
     # add rows
-    airports_created = add_airports(conn, airports)
-    flights_created = add_flights(conn, flights)
+    add_airports(conn, airports)
+    add_flights(conn, flights)
 
     # get rows
     fetch_all(conn, table_names)
