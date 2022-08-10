@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Search from "./Search";
 import Flight from "./Flight";
+import Trips from "./Trips";
 import contexts from "./contexts";
 import controllers from "./controller";
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="login" element={<SignIn />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="flights" element={<Flight />} />
+            <Route path="trips" element={<Trips />} />
           </Routes>
         </BrowserRouter>
       </contexts.apiContext.Provider>

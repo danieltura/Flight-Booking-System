@@ -7,6 +7,7 @@ class Flight(models.Model):
     departure = models.TextField()
     destination = models.TextField()
     time = models.DateTimeField()
+    cost = models.FloatField()
 
     def _str_(self):
         return self.name

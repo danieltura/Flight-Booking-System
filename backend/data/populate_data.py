@@ -51,8 +51,8 @@ def delete_all_rows(conn, table_names):
 
 
 def add_flights(conn, flights):
-    sql = ''' INSERT INTO flight_system_flight(seats, booked_seats, departure, destination, time)
-              VALUES(?,?,?,?,?) '''
+    sql = ''' INSERT INTO flight_system_flight(seats, booked_seats, departure, destination, time, cost)
+              VALUES(?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.executemany(sql, flights)
     conn.commit()
@@ -85,15 +85,16 @@ def curate_flights(airports):
                     "seats": randrange(350, 450),
                     "booked_seats": 0,
                     "departure": from_f['code'],
-                    "destination": to_f['code']
+                    "destination": to_f['code'],
+                    "cost": randrange(1400, 2500)
                 }
                 flights = curate_flight_date(flight)
                 all_flights += flights
 
     process_data = []
     for data in all_flights:
-        process_data.append(
-            (data["seats"], data["booked_seats"], data["departure"], data["destination"], data["time"]))
+        process_data.append((data["seats"], data["booked_seats"],
+                            data["departure"], data["destination"], data["time"], data["cost"]))
     return process_data
 
 

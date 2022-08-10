@@ -16,7 +16,12 @@ export default class UserController {
   }
 
   async addUser(user) {
-    const user_ = await axios.post(this.base_url, user);
-    return user_.data;
+    const new_user = await axios.post(this.base_url, user);
+    return new_user.data;
+  }
+
+  async updateUser(id, user) {
+    const update_user = await axios.put(this.base_url + id + "/", user);
+    return update_user.data;
   }
 }
